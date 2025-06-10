@@ -1,0 +1,78 @@
+body {
+  background: #23292f;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin-top: 60px;
+}
+.lampu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+.lampu-svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 24px #ffe06644);
+}
+#lampu-glow {
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+#lampu-svg.nyala #lampu-glow {
+  opacity: 0.45;
+  animation: lampGlowAnim 1.6s ease-in-out infinite alternate;
+}
+@keyframes lampGlowAnim {
+  0% { opacity: 0.23;}
+  100% { opacity: 0.59;}
+}
+#bulb-shape {
+  transition: fill 0.33s, filter 0.33s;
+}
+#lampu-svg.nyala #bulb-shape {
+  fill: #fffcb1;
+  filter: drop-shadow(0 0 42px #ffe066cc);
+}
+#filament {
+  transition: stroke 0.2s, filter 0.2s;
+}
+#lampu-svg.nyala #filament {
+  stroke: #ffc107;
+  filter: drop-shadow(0 0 10px #ffe066cc);
+}
+#filament-group circle {
+  transition: fill 0.2s, filter 0.2s;
+}
+#lampu-svg.nyala #filament-group circle {
+  fill: #ffd700;
+  filter: drop-shadow(0 0 13px #ffe066cc);
+}
+#rays-group {
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+#lampu-svg.nyala #rays-group {
+  opacity: 1;
+  animation: raysPulse 2s ease-in-out infinite alternate;
+}
+@keyframes raysPulse {
+  0% { opacity: 0.6;}
+  100% { opacity: 1;}
+}
+button {
+  margin: 10px 8px;
+  padding: 10px 23px;
+  font-size: 1.1em;
+  background: #ffe066;
+  color: #222;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s;
+}
+button:hover {
+  background: #ffd700;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kipas Realistis Berputar</title>
+  <link rel="stylesheet" href="stylekipas.css">
+</head>
+<body>
+  <h2>Kipas Realistis Berputar (ON/OFF)</h2>
+  <div class="kipas-container">
+    <svg id="kipas-svg" class="kipas-svg" width="160" height="160" viewBox="0 0 160 160">
+      <!-- Center Hub -->
+      <circle cx="80" cy="80" r="20" fill="#e0e0e0" stroke="#0097b2" stroke-width="4" filter="url(#hubglow)"/>
+      <ellipse cx="80" cy="80" rx="10" ry="5" fill="#b0bec5" opacity="0.7"/>
+      <!-- Fan Blades Group -->
+      <g id="baling-group">
+        <!-- Blade 1 -->
+        <g>
+          <path d="M80,80 Q80,30 95,20 Q110,15 115,45 Q110,80 80,80 Z"
+            fill="url(#bladegradient)" stroke="#b9e2fc" stroke-width="2"/>
+        </g>
+        <!-- Blade 2 -->
+        <g transform="rotate(120 80 80)">
+          <path d="M80,80 Q80,30 95,20 Q110,15 115,45 Q110,80 80,80 Z"
+            fill="url(#bladegradient)" stroke="#b9e2fc" stroke-width="2"/>
+        </g>
+        <!-- Blade 3 -->
+        <g transform="rotate(240 80 80)">
+          <path d="M80,80 Q80,30 95,20 Q110,15 115,45 Q110,80 80,80 Z"
+            fill="url(#bladegradient)" stroke="#b9e2fc" stroke-width="2"/>
+        </g>
+      </g>
+      <!-- Axis/Stand -->
+      <rect x="72" y="110" width="16" height="40" rx="8" fill="#b0bec5" stroke="#0097b2" stroke-width="2"/>
+      <ellipse cx="80" cy="150" rx="15" ry="5" fill="#607d8b" opacity="0.7"/>
+      <defs>
+        <radialGradient id="bladegradient" cx="60%" cy="30%" r="90%">
+          <stop offset="0%" stop-color="#e0f7fa"/>
+          <stop offset="70%" stop-color="#81d4fa"/>
+          <stop offset="100%" stop-color="#0288d1"/>
+        </radialGradient>
+        <filter id="hubglow" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur stdDeviation="4" result="glow"/>
+          <feMerge>
+            <feMergeNode in="glow"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div>
+  <button onclick="kipasOn()">Nyalakan</button>
+  <button onclick="kipasOff()">Matikan</button>
+  <script src="scriptkipas.js"></script>
+</body>
+</html>

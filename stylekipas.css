@@ -1,0 +1,40 @@
+body {
+  background: #183153;
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  margin-top: 60px;
+}
+.kipas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+}
+.kipas-svg {
+  margin: 0 auto;
+  display: block;
+  filter: drop-shadow(0 0 12px #00b4d8cc);
+}
+#baling-group.berputar {
+  transform-origin: 80px 80px;
+  animation: kipasSpin 0.7s linear infinite;
+}
+@keyframes kipasSpin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+button {
+  margin: 10px 8px;
+  padding: 10px 23px;
+  font-size: 1.1em;
+  background: #00b4d8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s;
+}
+button:hover {
+  background: #0077b6;
+}

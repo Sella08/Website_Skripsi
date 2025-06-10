@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Lampu Bohlam Bulat Jadul (ON/OFF)</title>
+  <link rel="stylesheet" href="stylelampu.css">
+</head>
+<body>
+  <h2>Lampu Bohlam Bulat Jadul (ON/OFF)</h2>
+  <div class="lampu-container">
+    <svg id="lampu-svg" class="lampu-svg" width="220" height="340" viewBox="0 0 220 340">
+      <!-- Fitting (ulir) -->
+      <ellipse cx="110" cy="52" rx="34" ry="12" fill="#d3d3d3" stroke="#888" stroke-width="2"/>
+      <rect x="76" y="26" width="68" height="44" rx="16" fill="#e6e6e6" stroke="#aaa" stroke-width="2"/>
+      <rect x="82" y="10" width="56" height="20" rx="8" fill="#bbbbbb" stroke="#888" stroke-width="1"/>
+      <!-- Ulir fitting -->
+      <ellipse cx="110" cy="18" rx="27" ry="6" fill="#cccccc" stroke="#aaa" stroke-width="1" opacity="0.7"/>
+      <ellipse cx="110" cy="32" rx="29" ry="9" fill="#e0e0e0" stroke="#aaa" stroke-width="1" opacity="0.55"/>
+      <!-- Bohlam utama: bulat penuh dan bawah oval, sesuai lampubohlam.jpg -->
+      <path id="bulb-shape"
+        d="
+          M 60 115
+          Q 38 180 70 240
+          Q 110 315 150 240
+          Q 182 180 160 115
+          Q 147 60 110 60
+          Q 73 60 60 115
+          Z
+        "
+        fill="#fffde4" stroke="#ffe066" stroke-width="2.6"/>
+      <!-- Glow effect -->
+      <ellipse id="lampu-glow" cx="110" cy="200" rx="90" ry="120" fill="#ffe066" opacity="0"/>
+      <!-- Filamen spiral -->
+      <g id="filament-group">
+        <path id="filament"
+          d="M150,190 Q110,230 70,190
+             M90,210 Q110,225 130,210"
+          stroke="#ffae00" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <!-- Dudukan filamen -->
+        <rect x="106" y="94" width="8" height="90" rx="3" fill="#ffe066" opacity="0.75"/>
+        <circle cx="150" cy="190" r="7" fill="#ffe066" stroke="#ffc300" stroke-width="1.2"/>
+        <circle cx="70" cy="190" r="7" fill="#ffe066" stroke="#ffc300" stroke-width="1.2"/>
+      </g>
+      <!-- Dasar fitting -->
+      <ellipse cx="110" cy="300" rx="32" ry="12" fill="#b0b0b0" opacity="0.7"/>
+      <!-- Rays group -->
+      <g id="rays-group">
+        <line x1="110" y1="0" x2="110" y2="52" stroke="#ffe066" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+        <line x1="210" y1="110" x2="160" y2="150" stroke="#ffe066" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+        <line x1="218" y1="220" x2="170" y2="260" stroke="#ffe066" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+        <line x1="10" y1="110" x2="60" y2="150" stroke="#ffe066" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+        <line x1="2" y1="220" x2="50" y2="260" stroke="#ffe066" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+      </g>
+    </svg>
+  </div>
+  <button onclick="lampuOn()">Nyalakan</button>
+  <button onclick="lampuOff()">Matikan</button>
+  <script src="scriptlampu.js"></script>
+</body>
+</html>
