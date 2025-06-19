@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home DC Control System</title>
+    <link rel="stylesheet" href="smart_home_css.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏠 Smart Home DC Control System</h1>
+            <div class="status-indicator">
+                <span class="indicator online"></span>
+                <span>ESP8266 Connected</span>
+            </div>
+        </header>
+
+        <div class="main-dashboard">
+            <!-- House Layout Section -->
+            <div class="house-layout">
+                <h2>Layout Rumah DC</h2>
+                <div class="house-container">
+                    <!-- Dapur dan Ruang Makan -->
+                    <div class="room dapur-ruang-makan" data-room="dapur">
+                        <h3>Dapur & R. Makan</h3>
+                        <div class="device lamp" data-device="L5" data-power="30">
+                            <div class="lamp-icon" onclick="toggleDevice('L5')">💡</div>
+                            <span class="device-label">L5 (30W)</span>
+                            <div class="device-status" id="status-L5">OFF</div>
+                        </div>
+                    </div>
+
+                    <!-- WC -->
+                    <div class="room wc" data-room="wc">
+                        <h3>WC</h3>
+                        <div class="device lamp" data-device="L4" data-power="5">
+                            <div class="lamp-icon" onclick="toggleDevice('L4')">💡</div>
+                            <span class="device-label">L4 (5W)</span>
+                            <div class="device-status" id="status-L4">OFF</div>
+                        </div>
+                    </div>
+
+                    <!-- Ruang Tamu -->
+                    <div class="room ruang-tamu" data-room="ruang-tamu">
+                        <h3>Ruang Tamu</h3>
+                        <div class="device lamp" data-device="L2" data-power="20">
+                            <div class="lamp-icon" onclick="toggleDevice('L2')">💡</div>
+                            <span class="device-label">L2 (20W)</span>
+                            <div class="device-status" id="status-L2">OFF</div>
+                        </div>
+                        <div class="device fan" data-device="K2" data-power="12">
+                            <div class="fan-icon" onclick="toggleDevice('K2')">🌀</div>
+                            <span class="device-label">K2 (12W)</span>
+                            <div class="device-status" id="status-K2">OFF</div>
+                        </div>
+                    </div>
+
+                    <!-- Kamar -->
+                    <div class="room kamar" data-room="kamar">
+                        <h3>Kamar</h3>
+                        <div class="device lamp" data-device="L3" data-power="10">
+                            <div class="lamp-icon" onclick="toggleDevice('L3')">💡</div>
+                            <span class="device-label">L3 (10W)</span>
+                            <div class="device-status" id="status-L3">OFF</div>
+                        </div>
+                        <div class="device fan" data-device="K1" data-power="12">
+                            <div class="fan-icon" onclick="toggleDevice('K1')">🌀</div>
+                            <span class="device-label">K1 (12W)</span>
+                            <div class="device-status" id="status-K1">OFF</div>
+                        </div>
+                    </div>
+
+                    <!-- Teras -->
+                    <div class="room teras" data-room="teras">
+                        <h3>Teras</h3>
+                        <div class="device lamp" data-device="L1" data-power="10">
+                            <div class="lamp-icon" onclick="toggleDevice('L1')">💡</div>
+                            <span class="device-label">L1 (10W)</span>
+                            <div class="device-status" id="status-L1">OFF</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Control Panel Section -->
+            <div class="control-panel">
+                <!-- Battery Status -->
+                <div class="panel battery-panel">
+                    <h2>🔋 Status Baterai</h2>
+                    <div class="battery-visual">
+                        <div class="battery-container">
+                            <div class="battery-level" id="battery-level"></div>
+                            <div class="battery-percentage" id="battery-percentage">75%</div>
+                        </div>
+                    </div>
+                    <div class="battery-info">
+                        <div class="info-item">
+                            <span class="label">Tegangan:</span>
+                            <span class="value" id="battery-voltage">12.6V</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">SOC:</span>
+                            <span class="value" id="battery-soc">75%</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">DOD:</span>
+                            <span class="value" id="battery-dod">25%</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Est. Runtime:</span>
+                            <span class="value" id="estimated-runtime">8.5h</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power Monitoring -->
+                <div class="panel power-panel">
+                    <h2>⚡ Monitor Daya</h2>
+                    <div class="power-summary">
+                        <div class="power-item total-power">
+                            <span class="label">Total Konsumsi:</span>
+                            <span class="value" id="total-power">0W</span>
+                        </div>
+                        <div class="power-item total-current">
+                            <span class="label">Total Arus:</span>
+                            <span class="value" id="total-current">0A</span>
+                        </div>
+                    </div>
+                    
+                    <div class="device-list">
+                        <div class="device-item" data-device="L1">
+                            <span class="name">Lampu Teras (L1)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-L1">0W</span>
+                                <span class="current" id="current-L1">0A</span>
+                                <span class="voltage" id="voltage-L1">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="L2">
+                            <span class="name">Lampu R. Tamu (L2)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-L2">0W</span>
+                                <span class="current" id="current-L2">0A</span>
+                                <span class="voltage" id="voltage-L2">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="L3">
+                            <span class="name">Lampu Kamar (L3)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-L3">0W</span>
+                                <span class="current" id="current-L3">0A</span>
+                                <span class="voltage" id="voltage-L3">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="L4">
+                            <span class="name">Lampu WC (L4)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-L4">0W</span>
+                                <span class="current" id="current-L4">0A</span>
+                                <span class="voltage" id="voltage-L4">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="L5">
+                            <span class="name">Lampu Dapur (L5)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-L5">0W</span>
+                                <span class="current" id="current-L5">0A</span>
+                                <span class="voltage" id="voltage-L5">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="K1">
+                            <span class="name">Kipas Kamar (K1)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-K1">0W</span>
+                                <span class="current" id="current-K1">0A</span>
+                                <span class="voltage" id="voltage-K1">0V</span>
+                            </div>
+                        </div>
+                        <div class="device-item" data-device="K2">
+                            <span class="name">Kipas R. Tamu (K2)</span>
+                            <div class="metrics">
+                                <span class="power" id="power-K2">0W</span>
+                                <span class="current" id="current-K2">0A</span>
+                                <span class="voltage" id="voltage-K2">0V</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Environmental Sensors -->
+                <div class="panel sensor-panel">
+                    <h2>🌡️ Sensor Lingkungan</h2>
+                    <div class="sensor-grid">
+                        <div class="sensor-item">
+                            <span class="icon">🌡️</span>
+                            <span class="label">Suhu</span>
+                            <span class="value" id="temperature">28°C</span>
+                        </div>
+                        <div class="sensor-item">
+                            <span class="icon">💧</span>
+                            <span class="label">Kelembaban</span>
+                            <span class="value" id="humidity">65%</span>
+                        </div>
+                        <div class="sensor-item">
+                            <span class="icon">💡</span>
+                            <span class="label">Cahaya</span>
+                            <span class="value" id="light-level">250 lux</span>
+                        </div>
+                        <div class="sensor-item">
+                            <span class="icon">👤</span>
+                            <span class="label">Gerakan</span>
+                            <span class="value" id="motion-status">Tidak Ada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Alerts -->
+                <div class="panel alert-panel" id="alert-panel" style="display: none;">
+                    <h2>⚠️ Peringatan Sistem</h2>
+                    <div class="alert-message" id="alert-message"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="smart_home_js.js"></script>
+</body>
+</html>
